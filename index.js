@@ -1,6 +1,16 @@
 const express = require('express')
 const path = require('path')
-const PORT = process.env.PORT || 5000
+const surveyRouter = require('./routes/survey');
+//const PORT = process.env.PORT || 5000
 
-express()
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+//express()
+//  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
+var app = express();
+
+app.use('/survey', surveyRouter);
+app.listen(80, () => {
+  console.log("Server running on port 80");
+ });
+
+ module.exports = app;
