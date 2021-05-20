@@ -1,3 +1,6 @@
-var port = process.env.PORT || 8080;
-var server=app.listen(port,function() {
-console.log("app running on port 8080"); });
+const express = require('express')
+const path = require('path')
+const PORT = process.env.PORT || 5000
+
+express()
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
