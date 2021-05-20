@@ -9,7 +9,7 @@ const surveyRouter = require('./routes/survey');
 var app = express();
 
 app.use('/survey', surveyRouter);
-app.listen(80, () => {
+app.listen(PORT, () => {
   console.log("Server running on port 80");
  });
 
