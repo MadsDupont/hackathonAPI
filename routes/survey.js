@@ -9,7 +9,8 @@ const kit = ContractKit.newKitFromWeb3(web3)
 
 router.get('/', function(req, res, next) {
     
-    readAccount();
+    //readAccount();
+    send();
     res.send("Money is send.....");    
     
 });
@@ -21,7 +22,7 @@ async function readAccount(){
     let stabletoken = await kit.contracts.getStableToken()
     
     // 4. Address to look up
-    let anAddress = '0xe318464ecdd4fcaa290bd072923c5d9820ed6bb4'
+    let anAddress = '0x124cE8761E507955c7819120631020F55279fE36'
 
     // 5. Get token balances
     let celoBalance = await goldtoken.balanceOf(anAddress)
@@ -32,5 +33,45 @@ async function readAccount(){
     console.log(`${anAddress} cUSD balance: ${cUSDBalance.toString()}`)
 }
 
+async function send(){
+    // 10. Get your account
+    //let account = await getAccount()
+    
+    const account = web3.eth.accounts.privateKeyToAccount('0x3b02165483eec852c217db5ca52f5e5f2665e23674c276e1d85395777f69ff70');
+    // 11. Add your account to ContractKit to sign transactions
+    //kit.connection.addAccount(account.privateKey);
+    kit.addAccount(account.privateKey);
+    
+    // 12. Specify recipient Address    
+    let anAddress = '0xe318464ecdd4fcaa290bd072923c5d9820ed6bb4'
+
+    // 13. Specify an amount to send
+    let amount = 10
+
+    // 14. Get the token contract wrappers    
+    let goldtoken = await kit.contracts.getGoldToken()
+    let stabletoken = await kit.contracts.getStableToken()
+
+    // 15. Transfer CELO and cUSD from your account to an Address
+    // Specify cUSD as the feeCurrency when sending cUSD
+    let celotx = await goldtoken.transfer(anAddress, amount).send({from: account.address})
+    let cUSDtx = await stabletoken.transfer(anAddress, amount).send({from: account.address, feeCurrency: stabletoken.address})
+
+    // 16. Wait for the transactions to be processed
+    let celoReceipt = await celotx.waitReceipt()
+    let cUSDReceipt = await cUSDtx.waitReceipt()
+
+    // 17. Print receipts
+    console.log('CELO Transaction receipt: %o', celoReceipt)
+    console.log('cUSD Transaction receipt: %o', cUSDReceipt)
+
+    // 18. Get your new balances
+    let celoBalance = await goldtoken.balanceOf(account.address)
+    let cUSDBalance = await stabletoken.balanceOf(account.address)
+
+    // 19. Print new balance
+    console.log(`Your new account CELO balance: ${celoBalance.toString()}`)
+    console.log(`Your new account cUSD balance: ${cUSDBalance.toString()}`)
+}
 
 module.exports = router;
