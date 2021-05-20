@@ -5,7 +5,9 @@ require('dotenv').config();
 
 const main = async () => {
   // Create connection to DataHub Celo Network node
-  const web3 = new Web3(process.env.REST_URL);
+  //const web3 = new Web3(process.env.REST_URL);
+  //connect to Celo network directly
+  const web3 = new Web3(process.env.REST_URL_CELO);
   const client = ContractKit.newKitFromWeb3(web3);
 
   // Initialize account from our private key
