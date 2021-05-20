@@ -43,7 +43,7 @@ async function send(){
     kit.addAccount(account.privateKey);
     
     // 12. Specify recipient Address    
-    let anAddress = '0xe318464ecdd4fcaa290bd072923c5d9820ed6bb4'
+    let anAddress = '0x9ef546c352ef37538aaf58ed5c2f960bc0176b7d'
 
     // 13. Specify an amount to send
     let amount = 10
