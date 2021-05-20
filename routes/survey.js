@@ -8,7 +8,7 @@ const web3 = new Web3('https://alfajores-forno.celo-testnet.org')
 const kit = ContractKit.newKitFromWeb3(web3)
 
 router.get('/', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", 'https://youthful-euclid-8ef091.netlify.app/');
+    res.header("Access-Control-Allow-Origin", 'https://youthful-euclid-8ef091.netlify.app');
     res.header("Access-Control-Allow-Credentials", true);
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
