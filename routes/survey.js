@@ -43,10 +43,11 @@ async function send(){
     kit.addAccount(account.privateKey);
     
     // 12. Specify recipient Address    
-    let anAddress = '0x9ef546c352ef37538aaf58ed5c2f960bc0176b7d'
-
+    //let anAddress = '0x9ef546c352ef37538aaf58ed5c2f960bc0176b7d'
+    let anAddress = '0x13b2BB7FFDAA08A95363b7bDB0a9E0eef6E03fC6'
+    
     // 13. Specify an amount to send
-    let amount = 100000
+    let amount = 10000000
 
     // 14. Get the token contract wrappers    
     let goldtoken = await kit.contracts.getGoldToken()
